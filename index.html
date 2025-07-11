@@ -1,56 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="zh-CN">
 <head>
-  <!-- 
-      This is an HTML comment
-      You can write text in a comment and the content won't be visible in the page
-    -->
-
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="icon" href="https://glitch.com/favicon.ico" />
-
-  <!--
-      This is the page head - it contains info the browser uses
-      Like the title, which appears on the browser tab but not inside the page
-      Further down you'll see the content that displays in the page
-    -->
-  <title>Hello World!</title>
-
-  <!-- The website stylesheet -->
-  <link rel="stylesheet" href="/style.css" />
-
-  <!-- The website JavaScript file -->
-  <script src="/script.js" defer></script>
+  <title>宝宝的男朋友小窝</title>
+  <style>
+    body {
+      background: #ffe4e6;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: #333;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+    h1 {
+      color: #d6336c;
+      text-align: center;
+    }
+    #chat {
+      border: 2px solid #d6336c;
+      border-radius: 10px;
+      padding: 15px;
+      height: 300px;
+      overflow-y: auto;
+      background: #fff0f6;
+    }
+    #inputArea {
+      margin-top: 10px;
+      display: flex;
+    }
+    #inputArea input {
+      flex: 1;
+      padding: 8px;
+      border: 1px solid #d6336c;
+      border-radius: 5px 0 0 5px;
+      font-size: 16px;
+    }
+    #inputArea button {
+      background: #d6336c;
+      border: none;
+      color: white;
+      padding: 0 20px;
+      font-size: 16px;
+      border-radius: 0 5px 5px 0;
+      cursor: pointer;
+    }
+  </style>
 </head>
-
 <body>
-  <!--
-      The body includes the content you see in the page
-      Each element is defined using tags, like this <div></div>
-      The attributes like class="wrapper" let us style elements in the CSS
-    -->
-  <div class="wrapper">
-    <div class="content" role="main">
-      <h1 class="title">Oh hi website!</h1>
-      <img src="/cool-website.svg" class="illustration" alt="cool website" />
-      <div class="instructions">
-        <p>
-          Fork <a href="https://github.com/glitchdotcom/website-to-compute">this project</a> and open it in a GitHub Codespace.
-        </p>
-        <p> Follow the steps in the README to deploy your new website to Fastly in a few steps!
-        </p>
-
-      </div>
-
-      <footer class="footer">
-        <div>
-          <a class="remix" href="https://github.com/glitchdotcom/website-to-compute">🚧 Get your own site</a>
-        </div>
-      </footer>
-    </div>
+  <h1>宝宝的男朋友小窝</h1>
+  <div id="chat"></div>
+  <div id="inputArea">
+    <input type="text" id="messageInput" placeholder="对他说点什么..." />
+    <button onclick="sendMessage()">发送</button>
   </div>
-</body>
 
+  <script>
+    const chat = document.getElementById('chat');
+    const input = document.getElementById('messageInput');
+
+    function appendMessage(sender, text) {
+      const msg = document.createElement('div');
+      msg.textContent = sender + ": " + text;
+      chat.appendChild(msg);
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    function sendMessage() {
+      const text = input.value.trim();
+      if (!text) return;
+      appendMessage("你", text);
+      input.value = '';
+
+      setTimeout(() => {
+        // 这里简单模拟男朋友回复，可以后续接AI接口
+        let reply = "宝宝，我听你说：" + text;
+        appendMessage("男朋友", reply);
+      }, 1000);
+    }
+  </script>
+</body>
 </html>
